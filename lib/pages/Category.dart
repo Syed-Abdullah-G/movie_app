@@ -35,12 +35,13 @@ class CategoryPage extends StatelessWidget {
               Padding(padding: EdgeInsets.symmetric(vertical: 20,horizontal: 15),
               child: Column(
                 children: [
+                  for (int i =1;i < 5;i++)
                   Padding(padding: 
                   EdgeInsets.symmetric(vertical: 10),
                   child: Row(
                     children: [
                       ClipRRect(borderRadius: BorderRadius.circular(10),
-                        child: Image.asset("assets/images/profile.jpg",height: 70,width: 90,
+                        child: Image.asset("assets/images/up$i.jpg",height: 70,width: 90,
                         fit: BoxFit.cover,),
                       ),
                       SizedBox(width: 10,),
@@ -50,7 +51,7 @@ class CategoryPage extends StatelessWidget {
                         color: Colors.white,
                       ),),
                       Spacer(),
-                      Icon(Icons.arrow_forward_ios,color: Colors.white,size: 25,)
+                      Icon(Icons.arrow_forward_ios,color: Colors.white,size: 23,)
                     ],
                   ),)
                 ],
