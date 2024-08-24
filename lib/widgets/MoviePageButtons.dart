@@ -39,7 +39,7 @@ children: [
         )
       ]
     ),
-    child: Icon(Icons.favorite_border,
+    child: Icon(Icons.star,
     color: Colors.white,
     size: 35,),
   ),

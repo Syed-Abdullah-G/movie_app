@@ -44,7 +44,7 @@ class MoviesPage extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: Icon(
-                          Icons.favorite,
+                          Icons.star_border_outlined,
                           color: Colors.white,
                           size: 35,
                         ),
@@ -95,9 +95,9 @@ class MoviesPage extends StatelessWidget {
                               )
                             ]),
                         child: Icon(
-                          Icons.play_arrow,
+                          Icons.download,
                           color: Colors.white,
-                          size: 60,
+                          size: 45,
                         ),
                       )
                     ],
