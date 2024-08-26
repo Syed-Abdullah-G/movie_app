@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/widgets/CustomNavBar.dart';
 import 'package:movie_app/widgets/NewMoviesWidget.dart';
-import 'package:movie_app/widgets/UpcomingWidget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,13 +14,14 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Hello Alex",
+                        "Download Movies",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,
@@ -30,21 +29,13 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "What to Watch?",
+                        "Tamil Movies",
                         style: TextStyle(
                           color: Colors.white54,
                         ),
                       )
                     ],
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      "assets/images/profile.jpg",
-                      height: 60,
-                      width: 60,
-                    ),
-                  )
                 ],
               ),
             ),
@@ -57,30 +48,31 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
               child: Row(
                 children: [
-                  Icon(Icons.search, color: Colors.white54,),
+                  Icon(
+                    Icons.search,
+                    color: Colors.white54,
+                  ),
                   Container(
                     width: 300,
                     margin: EdgeInsets.only(left: 5),
                     child: TextFormField(
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Search",
-                        hintStyle: TextStyle(color: Colors.white54)
-                      ),
+                          border: InputBorder.none,
+                          hintText: "Search",
+                          hintStyle: TextStyle(color: Colors.white54)),
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(height: 30,),
-            UpcomingWidget(),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 20,
+            ),
             NewMoviesWidget(),
           ],
         )),
       ),
-      bottomNavigationBar: CustomNavBar(),
     );
   }
 }
