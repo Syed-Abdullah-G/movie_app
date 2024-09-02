@@ -97,168 +97,179 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-        height: 60,
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-            color: Color(0xFF292B37), borderRadius: BorderRadius.circular(10)),
-        child: Row(
-          children: [
-            Icon(
-              Icons.search,
-              color: Colors.white54,
-            ),
-            Container(
-              width: 300,
-              margin: EdgeInsets.only(left: 5),
-              child: TextField(
-                onChanged: onQueryChanged,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search",
-                    hintStyle: TextStyle(color: Colors.white54)),
-              ),
-            )
-          ],
-        ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      FutureBuilder(
-        future: _futureData,
-        builder: (BuildContext context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (snapshot.hasError) {
-            return Center(
-              child: Text("Error : ${snapshot.error}"),
-            );
-          }
-          if (!snapshot.hasData) {
-            return Center(
-              child: Text("Document does not exist"),
-            );
-          }
-
-          //final data = snapshot.data!.data() as Map<String, dynamic>;
-          //final imageUrls = data["image_url"] as List<dynamic>;
-          //final download_urls = data["download_url"];
-
-          //if (filteredImageUrl.isEmpty){
-          //filteredImageUrl = List<String>.from(imageUrls);
-          //filteredDownloadUrl = List<String>.from(download_urls);
-          //}
-
-          return Column(children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "New Movies",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Column(
+    return GestureDetector(
+      onTap: () {
+        //dismiss the keyboard when tapping anywhere outside the text field
+        FocusScope.of(context).unfocus();
+      },
+    
+        child: Column(children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.06,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                color: Color(0xFF292B37),
+                borderRadius: BorderRadius.circular(10)),
+            child: Row(
               children: [
-                Container(
-                  height: 600,
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 30,
-                        childAspectRatio: 0.6
-
-                        // Adjust to fit your design
-                        ),
-                    itemCount: filteredImageUrl.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          _launchInBrowser(filteredDownloadUrl[index]);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(left: 10),
-                          decoration: BoxDecoration(
-                              color: Color(0xFF292B37),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 104, 88, 21)
-                                      .withOpacity(0.5),
-                                  spreadRadius: 0.7,
-                                  blurRadius: 6,
-                                )
-                              ]),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                                child: Image.network(
-                                  filteredImageUrl[index],
-                                  height: 170,
-                                  width: 190,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 5,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Text(
-                                        _extractMovieName(
-                                          filteredImageUrl[index],
-                                        ),
-                                        softWrap: true,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                Icon(
+                  Icons.search,
+                  color: Colors.white54,
+                ),
+                SizedBox(
+                  width: 3,
+                ),
+                Expanded(
+                  child: TextField(
+                    onChanged: onQueryChanged,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Search",
+                        hintStyle: TextStyle(color: Colors.white54)),
                   ),
                 ),
               ],
-            )
-          ]);
-        },
-      )
-    ]);
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          FutureBuilder(
+            future: _futureData,
+            builder: (BuildContext context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error : ${snapshot.error}"),
+                );
+              }
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Text("Document does not exist"),
+                );
+              }
+        
+              //final data = snapshot.data!.data() as Map<String, dynamic>;
+              //final imageUrls = data["image_url"] as List<dynamic>;
+              //final download_urls = data["download_url"];
+        
+              //if (filteredImageUrl.isEmpty){
+              //filteredImageUrl = List<String>.from(imageUrls);
+              //filteredDownloadUrl = List<String>.from(download_urls);
+              //}
+        
+              return Column(children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "New Movies",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Column(
+                  children: [
+                    Container(
+                    height: MediaQuery.of(context).size.height * 0.65,
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 0.55
+        
+                            // Adjust to fit your design
+                            ),
+                        itemCount: filteredImageUrl.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              _launchInBrowser(filteredDownloadUrl[index]);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                  color: Color(0xFF292B37),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 104, 88, 21)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 0.7,
+                                      blurRadius: 6,
+                                    )
+                                  ]),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                    child: Image.network(
+                                      filteredImageUrl[index],
+                                      height: MediaQuery.of(context).size.height *
+                                          0.21,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 10,
+                                      horizontal: 5,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Text(
+                                            _extractMovieName(
+                                              filteredImageUrl[index],
+                                            ),
+                                            softWrap: true,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                )
+              ]);
+            },
+          )
+        ]),
+      
+    );
   }
 }

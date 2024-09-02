@@ -7,43 +7,41 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-            child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        body: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 50, left: 10,right: 10,bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Download Movies",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        "Tamil Movies",
-                        style: TextStyle(
-                          color: Colors.white54,
-                        ),
-                      )
-                    ],
+                  Text(
+                    "Download Movies",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
+                  Text(
+                    "Tamil Movies",
+                    style: TextStyle(
+                      color: Colors.white54,
+                    ),
+                  )
                 ],
               ),
-            ),
-            
-            NewMoviesWidget(),
-          ],
-        )),
-      ),
-    );
+            ],
+          ),
+        ),
+      
+       
+         NewMoviesWidget()
+        
+      ],
+    ));
   }
 }
