@@ -9,7 +9,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -35,9 +35,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xFF0F111D)
+        scaffoldBackgroundColor: const Color(0xFF0F111D)
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );  
   }
 }

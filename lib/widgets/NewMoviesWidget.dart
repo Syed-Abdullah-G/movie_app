@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final db = FirebaseFirestore.instance;
@@ -78,8 +77,8 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
     return movieName.replaceAll('-', ' ').toUpperCase();
   }
 
-  Future<void> _launchInBrowser(String url_raw) async {
-    final Uri url = Uri.parse(url_raw);
+  Future<void> _launchInBrowser(String urlRaw) async {
+    final Uri url = Uri.parse(urlRaw);
     if (!await launchUrl(
       url,
       mode: LaunchMode.externalApplication,
@@ -106,25 +105,25 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
         child: Column(children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.06,
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-                color: Color(0xFF292B37),
+                color: const Color(0xFF292B37),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.search,
                   color: Colors.white54,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 3,
                 ),
                 Expanded(
                   child: TextField(
                     onChanged: onQueryChanged,
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Search",
                         hintStyle: TextStyle(color: Colors.white54)),
@@ -133,14 +132,14 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           FutureBuilder(
             future: _futureData,
             builder: (BuildContext context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -150,7 +149,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                 );
               }
               if (!snapshot.hasData) {
-                return Center(
+                return const Center(
                   child: Text("Document does not exist"),
                 );
               }
@@ -165,7 +164,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
               //}
         
               return Column(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -180,15 +179,13 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
-                Column(
-                  children: [
-                    Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
+                
+                 
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 1,
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        shrinkWrap: true,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             crossAxisSpacing: 5,
                             mainAxisSpacing: 10,
@@ -203,13 +200,13 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                               _launchInBrowser(filteredDownloadUrl[index]);
                             },
                             child: Container(
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
-                                  color: Color(0xFF292B37),
+                                  color: const Color(0xFF292B37),
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color.fromARGB(255, 104, 88, 21)
+                                      color: const Color.fromARGB(255, 104, 88, 21)
                                           .withOpacity(0.5),
                                       spreadRadius: 0.7,
                                       blurRadius: 6,
@@ -219,7 +216,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(10),
                                       topRight: Radius.circular(10),
                                     ),
@@ -231,7 +228,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                       vertical: 10,
                                       horizontal: 5,
                                     ),
@@ -246,7 +243,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                                               filteredImageUrl[index],
                                             ),
                                             softWrap: true,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -263,8 +260,8 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                         },
                       ),
                     ),
-                  ],
-                )
+                  
+                
               ]);
             },
           )
