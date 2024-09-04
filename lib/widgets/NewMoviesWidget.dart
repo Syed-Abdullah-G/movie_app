@@ -96,7 +96,8 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
       });
     } else {
       setState(() {
-        width_childaspect = 0.67;
+        width_childaspect = 0.68;
+        //0.67
       });
     }
   }
@@ -198,7 +199,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                   gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 5,
-                      mainAxisSpacing: 20,
+                      mainAxisSpacing: 10,
                       childAspectRatio: width_childaspect
                       
                       ),
@@ -232,16 +233,11 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                               child: Image.network(
                                 filteredImageUrl[index],
                                  height: width_childaspect == 0.73 ? 0 : 
-                                    MediaQuery.of(context).size.height * 0.21,
+                                    MediaQuery.of(context).size.height * 0.188,//0.21
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 5,
-                              ),
-                              child: Column(
+                           Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SingleChildScrollView(
@@ -260,7 +256,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                                   ),
                                 ],
                               ),
-                            ),
+                            
                           ],
                         ),
                       ),
