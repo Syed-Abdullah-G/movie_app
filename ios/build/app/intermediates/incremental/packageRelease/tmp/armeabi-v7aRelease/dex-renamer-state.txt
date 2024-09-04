@@ -1,0 +1,4 @@
+#Wed Sep 04 23:38:36 IST 2024
+base.0=/Users/syedabdullah/Desktop/movie_app/ios/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

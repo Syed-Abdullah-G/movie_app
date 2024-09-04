@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.movieApp</string>
+	<string>com.movieapp.app</string>
 	<key>PROJECT_ID</key>
 	<string>movie-app-55963</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:978672813:ios:86dd4d99753cc81644fa24</string>
+	<string>1:978672813:ios:6ec368294233abd644fa24</string>
 </dict>
 </plist>

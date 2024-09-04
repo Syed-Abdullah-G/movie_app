@@ -31,9 +31,9 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
-  pod 'FirebaseFirestore',
-    :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git',
-    :tag => '10.29.0'
+  # pod 'FirebaseFirestore',
+  #   :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git',
+  #   :tag => '10.29.0'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
   target 'RunnerTests' do
@@ -42,7 +42,10 @@ target 'Runner' do
 end
 
 post_install do |installer|
-  installer.pods_project.targets.each do |target| 
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+    end
     flutter_additional_ios_build_settings(target)
   end
 end
