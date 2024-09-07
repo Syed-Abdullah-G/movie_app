@@ -88,34 +88,14 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
     }
   }
 
-  void setWidth() {
-    final width = MediaQuery.of(context).size.width;
-    if (width > 450) {
-      setState(() {
-        width_childaspect = 0.73;
-      });
-    } else {
-      setState(() {
-        width_childaspect = 0.68;
-        //0.67
-      });
-    }
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _futureData = _fetchData();
-    
   }
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    setWidth();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -196,13 +176,11 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                 height: MediaQuery.of(context).size.height * 1,
                 child: GridView.builder(
                   shrinkWrap: true,
-                  gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 10,
-                      childAspectRatio: width_childaspect
-                      
-                      ),
+                      childAspectRatio: 0.68),
                   itemCount: filteredImageUrl.length,
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -232,31 +210,30 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                               ),
                               child: Image.network(
                                 filteredImageUrl[index],
-                                 height: width_childaspect == 0.73 ? 0 : 
-                                    MediaQuery.of(context).size.height * 0.188,//0.21
+                                height: MediaQuery.of(context).size.height *
+                                        0.188,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                           Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Text(
-                                      _extractMovieName(
-                                        filteredImageUrl[index],
-                                      ),
-                                      softWrap: true,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Text(
+                                    _extractMovieName(
+                                      filteredImageUrl[index],
+                                    ),
+                                    softWrap: true,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                ],
-                              ),
-                            
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
