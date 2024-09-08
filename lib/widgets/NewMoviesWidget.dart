@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final db = FirebaseFirestore.instance;
@@ -88,14 +89,26 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
     }
   }
 
+  Future confirm_download(int index) async {
+    await PanaraConfirmDialog.show(context,
+        message: "Download will Start in your Browser",
+        title: "Download Movie",
+        confirmButtonText: "Download",
+        cancelButtonText: "Cancel", onTapConfirm: () async {
+          Navigator.pop(context);
+      await _launchInBrowser(filteredDownloadUrl[index]);
+    }, onTapCancel: () {
+      Navigator.pop(context);
+    }, panaraDialogType: PanaraDialogType.custom,color: const Color.fromARGB(255, 42, 53, 76));
+    return SizedBox();
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
+    // TODO: implement initStateq
     super.initState();
     _futureData = _fetchData();
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +198,7 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        _launchInBrowser(filteredDownloadUrl[index]);
+                        confirm_download(index);
                       },
                       child: Container(
                         margin: const EdgeInsets.all(2),
@@ -210,8 +223,8 @@ class _NewMoviesWidgetState extends State<NewMoviesWidget> {
                               ),
                               child: Image.network(
                                 filteredImageUrl[index],
-                                height: MediaQuery.of(context).size.height *
-                                        0.188,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.188,
                                 fit: BoxFit.cover,
                               ),
                             ),
